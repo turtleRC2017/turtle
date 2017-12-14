@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+ <title id='titolo'>Turtle</title>
+ <link id='icona' rel="icon" href="static/images/logo.png">
+ <link rel="stylesheet" type="text/css" href="static/stylesheets/index.css">
+ <link rel="stylesheet" type="text/css" href="static/stylesheets/turtle.css">
+</head>
+<body>
+ <header>
+  <img src="static/images/logo.png">
+  <h1><b>Turtle</b></h1>
+</header>
+
+<div id='maindiv'>
+  <form name='locationForm'>
+   <select name="transport" id='select'>
+    <option value="driving">Macchina</option>
+    <option value="train">Treno</option>
+    <option value="transit">Mezzi pubblici</option>
+    <option value="bicycling">Bicicletta</option>
+    <option value="walking">Piedi</option>
+</select>
+<br>
+<div class="row" id='forza' content="width=device-width">
+    <div class="col-md-4"><input id="from"  type="text" name="locationInput1" placeholder="Da: città o via"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4"><input id="to"  type="text" name="locationInput2" placeholder="A: città o via"></div>
+</div>
+</form>
+</div>
+<br><br>
+
+<div class="wrapper">
+  <div class="turtle">
+    <div class="leg"></div>
+    <div class="body"></div>
+    <div class="head"></div>
+  </div>
+</div>
+
+</body>
+
+</html>
