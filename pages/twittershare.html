@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Condividi il tuo viaggio!</title>
+    <script type ="text/javascript" src ="/static/scripts/codebird.js"></script>
+  </head>
+  
+  <body>
+    <h1 style="text-align": center> Condividi il tuo viaggio su Twitter! </h1>
+
+    <script>
+      var cb = new Codebird;
+      cb.setConsumerKey('sX1xxVu3llNfxVZPuixLYuL1a', 'fTPSPg9omDJVcZ3gZINUABIQJ2CcxIhoh2M6n4fKLYmHAkEgIG');
+      cb.setToken('935471064494346240-ja2YIRfOcwQv912jbALJaxhvBVo2vbd', 'nl07YopIYqJqMbWuufP982aFjL9QOArSMhhahuE39EZu3');
+
+      var params = {
+        status: "Turtle share test"
+      };
+      cb.__call(
+        "statuses_update",
+        params,
+        function (reply, rate, err) {
+          console.log(reply);
+        }
+      );
+    </script>
+  </body>
+</html>

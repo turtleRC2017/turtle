@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- css di bootstrap a caso -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+  <title>Turtle</title>
+</head>
+<body>
+  <div class="container">
+    <h2 id="text-center">Dove cazzo vuoi andare: </h2>
+    <form name="locationForm" action="formHandler" method="POST">
+      <input type="text" name="locationInput1" class="form-control form-control-lg" id="autocomplete" onFocus="geolocate()">
+      <br>
+      <input type="text" name="locationInput2" class="form-control form-control-lg" id="autocomplete2" onFocus="geolocate()">
+      <br>
+      <select name="transport">
+          <option value="driving">Macchina</option>
+          <option value="transit">Mezzi pubblici</option>
+          <option value="bicycling">Bicicletta</option>
+          <option value="walking">Piedi</option>
+      </select>
+      <br>
+      <input type="hidden" name="ciao" value="BELLA">
+      <input type="submit" value="Invia">
+    </form>
+  </div>
+  <div id="map"></div>
+  <div id="datas"></div>
+      <script>
+    /*function geocode(){
+    	function Get(uri){
+        	var Httpreq= new XMLHttpRequest();
+        	Httpreq.open('GET',uri,false);
+        	Httpreq.send(null);
+        	return Httpreq.responseText;
+    	}
+      var partenza = document.locationForm.locationInput1.value;
+      var arrivo = document.locationForm.locationInput2.value;
+      var mezzo = document.locationForm.transport.value;
+
+      var mapoutput = '<iframe width="550"height="350"frameborder="0" style="border:0 display:block; margin:auto"src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAzT5feLkHC4CY2AG1OWSRNiwO65VK_QBw&origin='+partenza+'&destination='+arrivo+'&avoid=tolls|highways" allowfullscreen></iframe>'
+      document.getElementById('map').innerHTML = mapoutput;
+
+      var percorso = 'https://maps.googleapis.com/maps/api/directions/json?origin='+partenza+'&destination='+arrivo+'&mode='+mezzo+'&key=AIzaSyAzT5feLkHC4CY2AG1OWSRNiwO65VK_QBw'
+      var viaggio=JSON.parse(Get(percorso));
+
+     var i = 0;
+     var stepbystep = '';
+     var step;
+     var km;
+     var str = viaggio.routes[0].legs[0].steps;
+     
+     while(str[i]!=null) {
+     	step = viaggio.routes[0].legs[0].steps[i].html_instructions;
+     	km = viaggio.routes[0].legs[0].steps[i].distance.text;
+     	stepbystep += i + ' - '+step + ' per ' + km + '<br>';
+     	i+=1;
+     }
+      document.getElementById('datas').innerHTML = stepbystep;
+    }*/
+    //AUTOCOMPLETAMENTO
+    var placeSearch, autocomplete, autocomplete2;
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById('autocomplete')),{types: ['geocode']});
+        autocomplete2 = new google.maps.places.Autocomplete((document.getElementById('autocomplete2')),{types: ['geocode']});
+    }
+    function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzT5feLkHC4CY2AG1OWSRNiwO65VK_QBw&libraries=places&callback=initAutocomplete"
+        async defer></script>
+</body>
+</html>
