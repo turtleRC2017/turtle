@@ -24,13 +24,14 @@
       </select>
       <br>
       <input type="hidden" name="ciao" value="BELLA">
-      <input type="submit" value="Invia">
+      <button type="button" name="submit" class="btn btn-primary btn-block" onclick="geocode()">Calcola percorso</button>
+      <input type="submit" value="invia">
     </form>
   </div>
   <div id="map"></div>
   <div id="datas"></div>
       <script>
-    /*function geocode(){
+    function geocode(){
     	function Get(uri){
         	var Httpreq= new XMLHttpRequest();
         	Httpreq.open('GET',uri,false);
@@ -60,7 +61,7 @@
      	i+=1;
      }
       document.getElementById('datas').innerHTML = stepbystep;
-    }*/
+    }
     //AUTOCOMPLETAMENTO
     var placeSearch, autocomplete, autocomplete2;
     function initAutocomplete() {

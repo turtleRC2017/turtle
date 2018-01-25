@@ -24,27 +24,20 @@ app.get('/auto.html',function(req,res){
 });
 
 app.post('/formHandler', function(req, res) {
+	var objToCheck = {Id:id, Transport:req.body.transport, From:req.body.locationInput1, To:req.body.locationInput2 };
+  	var objStringified = JSON.stringify(objToCheck);
+  	console.log("********* Request: "+objStringified);
   //================================================================================================// DATA SENDER
   amqp.connect('amqp://localhost', function(err, conn) {
   conn.createChannel(function(err, ch) {
-    ch.assertQueue('', {exclusive: true}, function(err, q) {
-      var id = generateUuid()
-      ch.consume(q.queue, function(msg) {
-        if (msg.properties.correlationId == id) {
-          console.log(' [.] Got %s', msg.content.toString());
-          setTimeout(function() { conn.close(); process.exit(0) }, 500);
-          res.send(msg.content.toString());
-        }
-      }, {noAck: true});
-
-     	var objToCheck = {Id:id, Transport:req.body.transport, From:req.body.From, To:req.body.To, Departing:req.body.Departing, Returning:req.body.Returning, Adults:req.body.Adults, Children:req.body.children };
-  		var objStringified = JSON.stringify(objToCheck);
-  		console.log("********* Request: "+objStringified);
-      	ch.sendToQueue('rpc_queue',new Buffer(objStringified),{ correlationId: id, replyTo: q.queue });
-      	
-    });
-   });
+    var msg = 'IN ATTESA CHE FACCIAMO IL FILE DA CARICARE'
+    var q = 'task_queue';
+    ch.assertQueue(q, {durable: true});
+    ch.sendToQueue(q, new Buffer(msg), {persistent: true});
+    console.log(" [x] Sent '%s'", msg);
   });
+  //setTimeout(function() { conn.close(); process.exit(0) }, 500);
+});
   //=================================================================================================//
 });
 
