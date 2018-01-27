@@ -10,13 +10,13 @@ amqp.connect('amqp://localhost', function(err, conn) {
     ch.prefetch(1);
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q);
     ch.consume(q, function(msg) {
-      var secs = msg.content.toString().split('.').length - 1;
-
-      console.log(" [x] Received %s", msg.content.toString());
+      
+      var transp = JSON.parse(msg.content.toString());
+      console.log(" [x] Received %s", transp.Transport);
       setTimeout(function() {
         console.log(" [x] Done");
         ch.ack(msg);
-      }, secs * 1000);
+      });
     }, {noAck: false});
   });
 });
