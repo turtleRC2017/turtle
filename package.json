@@ -1,0 +1,27 @@
+{
+  "name": "turtle",
+  "version": "1.0.0",
+  "description": "plan yoor best trip ever",
+  "main": "app.js",
+  "dependencies": {
+    "amqp": "^0.2.6",
+    "dropbox": "^2.5.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turtleRC2017/turtle.git"
+  },
+  "keywords": [
+    "travel"
+  ],
+  "author": "turtle group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/turtleRC2017/turtle/issues"
+  },
+  "homepage": "https://github.com/turtleRC2017/turtle#readme"
+}

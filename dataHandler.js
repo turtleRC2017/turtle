@@ -11,8 +11,7 @@ amqp.connect('amqp://localhost', function(err, conn) {
     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q);
     ch.consume(q, function(msg) {
       
-      var transp = JSON.parse(msg.content.toString());
-      console.log(" [x] Received %s", transp.Transport);
+      console.log(" [x] Application used at %s", msg.content.toString());
       setTimeout(function() {
         console.log(" [x] Done");
         ch.ack(msg);

@@ -31,12 +31,11 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
         <div class="w3-row">
           <h5>Select your transport:</h5>
-          <select class="w3-select w3-center w3-dark-grey" id="Transport" name="transport" onclick="selezione()"  style="width: 30% ">
+          <select class="w3-select w3-center w3-dark-grey" id="Transport" name="transport" onclick="selezione()"  style="width: 30% " required>
           <option value = "" disabled selected>Choose your option</option>
           <option value="train" >Train</option>
           <option value="driving">Macchina</option>
           <option value="transit">Mezzi pubblici</option>
-          <option value="bicycling">Bicicletta</option>
           <option value="walking">Piedi</option>
         </select>
         </div>
@@ -81,23 +80,23 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <div class="w3-row">
           <div class="w3-col s6 m6 l6">
             <h5>From</h5>
-            <input name="locationInput1" class="w3-input w3-center w3-dark-grey" type="text" style="width: 95%; border-radius: 10px 10px 10px 10px;"  id="autocomplete" onFocus="geolocate()">
+            <input name="locationInput1" class="w3-input w3-center w3-dark-grey" type="text" style="width: 95%; border-radius: 10px 10px 10px 10px;"  id="autocomplete" onFocus="geolocate()" required>
           </div>
           <div class="w3-col s6 m6 l6">
             <h5>To</h5>
-            <input class="w3-input w3-center w3-dark-grey" type="text" style="width: 95%; border-radius: 10px 10px 10px 10px;" name="locationInput2" id="autocomplete2" onFocus="geolocate()">
+            <input class="w3-input w3-center w3-dark-grey" type="text" style="width: 95%; border-radius: 10px 10px 10px 10px;" name="locationInput2" id="autocomplete2" onFocus="geolocate()" required>
           </div>
         </div>
 
 
         <div class="w3-row">
           <div class="w3-col s6 m6 l6">
-            <h5>Partenza:</h5>
-            <input class="w3-input w3-center w3-dark-grey" type="date" id="Departing" name="day" style="width: 95%; border-radius: 10px 10px 10px 10px;">
+            <h5>Giorno Partenza:</h5>
+            <input class="w3-input w3-center w3-dark-grey" type="date" id="Departing" name="day" style="width: 95%; border-radius: 10px 10px 10px 10px;" min="2018-01-29" max="2018-04-30" required>
           </div>
           <div class="w3-col s6 m6 l6">
             <h5>Ora Partenza(hh)</h5>
-            <input class="w3-input w3-center w3-dark-grey" type="number" id="Hour" name="hour" style="width: 95%; border-radius: 10px 10px 10px 10px;">
+            <input class="w3-input w3-center w3-dark-grey" type="number" id="Hour" name="hour" style="width: 95%; border-radius: 10px 10px 10px 10px;"  required>
           </div>
 
         </div>
@@ -106,11 +105,11 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         <div class="w3-row">
           <div class="w3-col s6 m6 l6">
             <h5 id="ScrittaAdult">Adults (Max 3)</h5>
-            <input class="w3-input w3-center w3-dark-grey" type="number" name="adults" id="Adults" style="width: 95%; border-radius: 10px 10px 10px 10px;">
+            <input class="w3-input w3-center w3-dark-grey" type="number" name="adults" id="Adults" style="width: 95%; border-radius: 10px 10px 10px 10px;" max="3" min="0" value="0">
           </div>
           <div class="w3-col s6 m6 l6">
             <h5 id="ScrittaChild">Children(Max 3)</h5>
-            <input class="w3-input w3-center w3-dark-grey" type="number" name="children" id="Children"  style="width: 95%; border-radius: 10px 10px 10px 10px;">
+            <input class="w3-input w3-center w3-dark-grey" type="number" name="children" id="Children"  style="width: 95%; border-radius: 10px 10px 10px 10px;" max="3" min="0" value="0">
           </div>
           
         </div>

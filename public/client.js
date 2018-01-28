@@ -3,7 +3,6 @@
 
 var socket = new WebSocket('ws://localhost:8081/');
 socket.onopen = function(event) {
-  log('Opened connection 🎉');
 }
 
 socket.onerror = function(event) {
@@ -15,35 +14,30 @@ socket.onmessage = function (event) {
 }
 
 socket.onclose = function(event) {
-  log('Closed connection 😱');
 }
 var log = function(text) {
-  
-  geocode(text);
+  var newobj = JSON.parse(text);
+  var partenza = newobj.From;
+  var arrivo = newobj.To;
+  var mezzo = newobj.Transport;
+  var data = newobj.Day;
+  var ora = newobj.Hour;
+  var adulti = newobj.Adults;
+  var bambini = newobj.Children;
+  if(mezzo == "train"){
+    trains(partenza, arrivo, data, ora, adulti, bambini);
+  }
+  else {
+    geocode(partenza,arrivo,mezzo);
+  }
 }
 
 window.addEventListener('beforeunload', function() {
   socket.close();
 });
 
-function geocode(obj){
-      function Get(uri){
-          var Httpreq= new XMLHttpRequest();
-          Httpreq.open('GET',uri,false);
-          Httpreq.send(null);
-          return Httpreq.responseText;
-      }
-      var newobj = JSON.parse(obj);
-      var partenza = newobj.From
-      var arrivo = newobj.To
-      var mezzo = newobj.Transport
-      /*if(mezzo == "train"){
-      	var data = newobj.Day;
-      	var ora = newobj.Hour;
-      	var adulti = newobj.Adults;
-      	var bambini = newobj.Children;
-      	trains(partenza, arrivo, data, ora, adulti, bambini);
-      }*/
+function geocode(partenza,arrivo,mezzo){
+
       var mapoutput = '<iframe width="550"height="350"frameborder="0" style="border:0 display:block; margin:auto"src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAzT5feLkHC4CY2AG1OWSRNiwO65VK_QBw&origin='+partenza+'&destination='+arrivo+'&mode='+mezzo+'&avoid=tolls|highways" allowfullscreen></iframe>'
       document.getElementById('map').innerHTML = mapoutput;
 
@@ -63,9 +57,18 @@ function geocode(obj){
      }
       document.getElementById('datas').innerHTML = stepbystep;
   }
-
+function Get(uri){
+  var Httpreq= new XMLHttpRequest();
+  Httpreq.open('GET',uri,false);
+  Httpreq.send(null);
+  return Httpreq.responseText;
+}
   function trains(partenza, arrivo, data, ora, adulti, bambini){
-    var viaggioUrl="https://www.lefrecce.it/msite/api/solutions?origin="+partenza+"&destination="+arrivo+"&arflag=A&adate="+data+"&atime="+ora+"&adultno="+adulti+"&childno="+bambini+"&direction=A&frecce=false&onlyRegional=false"
+    var fromUrl="https://www.lefrecce.it/msite/api/geolocations/locations?name="+partenza;
+    var toUrl="https://www.lefrecce.it/msite/api/geolocations/locations?name="+arrivo;
+    var newPartenza=JSON.parse(Get(fromUrl))[0].name;
+    var newArrivo=JSON.parse(Get(toUrl))[0].name;
+    var viaggioUrl="https://www.lefrecce.it/msite/api/solutions?origin="+newPartenza+"&destination="+newArrivo+"&arflag=A&adate="+data+"&atime="+ora+"&adultno="+adulti+"&childno="+bambini+"&direction=A&frecce=false&onlyRegional=false"
     var viaggio=JSON.parse(Get(viaggioUrl));
     var i;
     for(i=0;i<viaggio.length;i++){//For di Controllo
