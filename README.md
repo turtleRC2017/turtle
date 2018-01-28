@@ -4,7 +4,7 @@
 
 Requisiti progetto:
 
-- La web app deve utilizzare due servizi REST esterni di cui almeno uno deve essere acceduto tramite OAuth e almeno uno deve essere commerciale
+- La web app deve utilizzare due servizi REST esterni di cui almeno uno deve accedere tramite OAuth e almeno uno deve essere commerciale
 
 - La web app deve utilizzare RabbitMQ
 
